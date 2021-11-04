@@ -9,7 +9,7 @@ import SearchBar from "./SearchBar";
 
 export default function Home(){
     const dispatch = useDispatch(); // pasar a archivo nuevo
-    const allDogs = useSelector((state) => state.dogs) //lo mismo que mapStateToProps - trae todo lo de actions
+    const allDogs = useSelector((state) => state.searchDogs) //lo mismo que mapStateToProps - trae todo lo de actions
 
     const [currentPage, setCurrentPage] = useState(1) // Local State save in a local state the current page (set to 1 bc is where we are rn)
     const [dogsPerPage, setDogsPerPage] = useState(8) // Local State set the amount of dogs required per page
@@ -62,7 +62,8 @@ export default function Home(){
                         <Link to={'/home/' + dog.id}>
                         <Card name = {dog.name} 
                               temperament = {dog.temperament ? dog.temperament : dog.temperaments} 
-                              weight = {dog.weight} 
+                              min_weight = {dog.min_weight} 
+                              max_weight = {dog.max_weight} 
                               image = {dog.image} 
                               key = {dog.id}
                         />
