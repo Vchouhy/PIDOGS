@@ -5,10 +5,11 @@ const { getAllDogs } = require('../routes/controllers');
 const axios = require('axios')
 
 router.get('/', async(req, res, next)=>{
-    try{const {name} = req.query;
-    let allDogs = await getAllDogs();
+    try{
+    const {name} = req.query;
+    const allDogs = await getAllDogs();
     if(name){
-        let dogName = await allDogs.filter(dog => dog.name.toLowerCase().includes(name.toLowerCase())); //pregunto si incluye el nombre que me mandan por queruy
+        let dogName = await allDogs.filter(dog => dog.name.toLowerCase().includes(name.toLowerCase())); //pregunto si incluye el nombre que me mandan por query
         dogName.length ?
         res.status(200).send(dogName) :
         res.status(404).send('Dog not found')
@@ -37,7 +38,7 @@ router.post('/', async(req, res, next)=>{
    
     newDog.addTemperaments(temperamentDb)
     //console.log(temperamentDb)
-    res.send('Dog created succesfully')
+    res.send(newDog)
 })
 
 router.get('/:id', async (req,res)=>{

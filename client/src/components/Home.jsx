@@ -5,6 +5,7 @@ import { getAllDogs } from '../actions';
 import { Link } from 'react-router-dom'
 import Card from "./Card";
 import Pagination from "./Pagination";
+import SearchBar from "./SearchBar";
 
 export default function Home(){
     const dispatch = useDispatch(); // pasar a archivo nuevo
@@ -32,7 +33,7 @@ export default function Home(){
     return(
         <div>
             <Link to = '/dogs'>Create a new dog!</Link>
-            <h1>veamos que onda</h1>
+            <h1>NO FUNCIONA NADA</h1>
             <button onClick = {e=>{handleClick(e)}}>
                 Reload all dogs
             </button>
@@ -53,19 +54,20 @@ export default function Home(){
                             allDogs = {allDogs.length}
                             pagination = {pagination}
                 />
+                <SearchBar/>
                 
                 {currentDog?.map(dog=>{
                         return(
-                        <fragment>
+                        <div>
                         <Link to={'/home/' + dog.id}>
                         <Card name = {dog.name} 
-                              temperament = {dog.temperament} 
+                              temperament = {dog.temperament ? dog.temperament : dog.temperaments} 
                               weight = {dog.weight} 
                               image = {dog.image} 
                               key = {dog.id}
                         />
                         </Link>
-                        </fragment>
+                        </div>
                     )})
                 }
             </div>

@@ -1,7 +1,8 @@
 
 const initialState = { //declare initial state w/dogs
     dogs : [],
-    allDogs : []
+    allDogs : [],
+    searchDogs : []
 }
 
 function rootReducer (state = initialState, action) {
@@ -10,7 +11,8 @@ function rootReducer (state = initialState, action) {
         case 'GET_ALL_DOGS':
             return{
                 ...state,
-                dogs: action.payload //bring me ev that comes w/ get all dogs fx
+                dogs: action.payload, //bring me ev that comes w/ get all dogs fx
+                searchDogs: action.payload
             }
         // case 'FILTER_BY_TEMPERAMENT':
         //     const allDogs = state.temperament
@@ -19,13 +21,12 @@ function rootReducer (state = initialState, action) {
         //         ...state,
 
         //     }
-        case 'FILTER_CREATED_BY_ME':
-            const allAllDogs = state.allDogs
-            const filterCreatedByMe = action.payload === 'created' ? allAllDogs.filter(dog => dog.createdInDataBase) : allAllDogs.filter(dog => !dog.createdInDataBase)
+        case 'GET_DOGS_BY_NAME':
             return{
                 ...state,
-                dogs: action.payload === 'all breeds' ? state.allAllDogs : filterCreatedByMe
+                searchDogs: action.payload
             }
+
         default: return state;
     }
 }
