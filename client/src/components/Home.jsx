@@ -7,6 +7,7 @@ import Card from "./Card";
 import Pagination from "./Pagination";
 import SearchBar from "./SearchBar";
 
+
 export default function Home(){
     const dispatch = useDispatch(); // pasar a archivo nuevo
     const allDogs = useSelector((state) => state.searchDogs) //lo mismo que mapStateToProps - trae todo lo de actions
@@ -55,10 +56,10 @@ export default function Home(){
                             pagination = {pagination}
                 />
                 <SearchBar/>
-                
+             
                 {currentDog?.map(dog=>{
                         return(
-                        <div>
+                        <div className = 'Imagen'>
                         <Link to={'/home/' + dog.id}>
                         <Card name = {dog.name} 
                               temperament = {dog.temperament ? dog.temperament : dog.temperaments} 
@@ -71,6 +72,7 @@ export default function Home(){
                         </div>
                     )})
                 }
+               
             </div>
         </div>
     )

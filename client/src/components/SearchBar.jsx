@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { getDogsByName } from '../actions';
 
+
 export default function SearchBar(){
     const dispatch = useDispatch();
     const [ name, setName ] = useState('')

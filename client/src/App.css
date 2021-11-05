@@ -8,8 +8,9 @@
 }
 .Number{
   display: flexbox;
-  color: hotpink;
+  color: white;
 }
+
 
 .App-logo {
   height: 40vmin;
