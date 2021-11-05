@@ -20,11 +20,6 @@ export default function SearchBar(){
         dispatch(getDogsByName(name))
     }
 
-
-    // function onSubmit(e){
-    //     e.preventDefault();
-    //     dispatch(getDogsByName(name))
-    // }
     return(
         <div>
             <input 
