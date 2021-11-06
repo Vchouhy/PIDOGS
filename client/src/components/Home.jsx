@@ -20,6 +20,7 @@ export default function Home(){
 
     const pagination = (pageNumber)=>{
         setCurrentPage(pageNumber)
+        setDogsPerPage(dogsPerPage)
     }
 
     useEffect(()=>{
@@ -33,7 +34,7 @@ export default function Home(){
 
     return(
         <div>
-            <Link to = '/dogs'>Create a new dog!</Link>
+            <Link to = '/dogs/form'>Create a new dog!</Link>
             <h1>NO FUNCIONA NADA</h1>
             <button onClick = {e=>{handleClick(e)}}>
                 Reload all dogs

@@ -1,5 +1,9 @@
 import axios from 'axios';
-import {GET_ALL_DOGS, GET_DOGS_BY_NAME} from './types'
+export const GET_ALL_DOGS = 'GET_ALL_DOGS'
+export const GET_DOGS_BY_NAME = 'GET_DOGS_BY_NAME'
+export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS'
+export const POST_DOG = 'POST_DOG'
+
 
 export function getAllDogs(){
     return async function(dispatch){
@@ -11,7 +15,7 @@ export function getAllDogs(){
         })
 
     }
-}
+};
 
 export function getDogsByName(name){
             return function(dispatch) {
@@ -26,8 +30,25 @@ export function getDogsByName(name){
                     console.log(error)
                 })
             }
-        }
+        };
 
+export function postDog(payload){
+    return async function(dispatch){
+        const response = await axios.post('http://localhost:3001/api/dogs', payload);
+        return response
+    }
+};
+
+export function getTemperaments(){
+    return async function(dispatch){
+        var temp = await axios('http://localhost:3001/api/temperament')
+        return dispatch({
+            type: GET_TEMPERAMENTS,
+            payload: temp.data
+        })
+
+    }
+}
 
 
 
