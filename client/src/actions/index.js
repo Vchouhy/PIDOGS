@@ -3,6 +3,7 @@ export const GET_ALL_DOGS = 'GET_ALL_DOGS'
 export const GET_DOGS_BY_NAME = 'GET_DOGS_BY_NAME'
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS'
 export const POST_DOG = 'POST_DOG'
+export const GET_DETAILS = 'GET_DETAILS'
 
 
 export function getAllDogs(){
@@ -40,16 +41,31 @@ export function postDog(payload){
 };
 
 export function getTemperaments(){
-    return async function(dispatch){
+    return async function(dispatch){ 
         var temp = await axios('http://localhost:3001/api/temperament')
         return dispatch({
             type: GET_TEMPERAMENTS,
             payload: temp.data
         })
-
     }
+    
 }
 
+export function getDetail(id){
+    return async function(dispatch){
+        try{
+            var json = await axios.get('http://localhost:3001/api/dogs' + id)
+            return dispatch({
+                type: GET_DETAILS,
+                payload: json.data
+            })
+        }
+        catch(error){
+            console.log(error)
+        }
+    } 
+
+}
 
 
 // export function filterDogsByTemperament(payload){

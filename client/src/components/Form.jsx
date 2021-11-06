@@ -3,18 +3,62 @@ import { Link, useHistory } from "react-router-dom";
 import { postDog, getTemperaments } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 
+
+function validate(input){
+    let error = {};
+    if(!input.name){
+        error.name = 'Name is required'
+    }
+    if(!input.minheight){
+        error.minheight = 'Minimum height is required'
+    }
+    if(input.minheight <= 8){
+        error.minheight = 'Height must be 9 or greater than 9'
+    }
+    if(!input.maxheight){
+        error.maxheight = 'Minimum height is required'
+    }
+    if(input.maxheight >=121){
+        error.maxheight = 'Height must be smaller than 120cm'
+    }
+    if(!input.minweight){
+        error.minweight = 'Minimum weight is required'
+    }
+    if(!input.maxweight){
+        error.maxweight = 'Maximum weight is required'
+    }
+    if(input.minweight <=0.9){
+        error.minweight = 'Minimum weight 1'
+    }
+    if(input.maxweight >=111){
+        error.maxweight = 'Maximum weight is 110'
+    }
+    if(!input.temperaments){
+        error.temperaments = 'Temperaments is required'
+    }
+    if(!input.image){
+        error.image = 'Image is required'
+    }
+    if(!input.life_span){
+        error.life_span = 'Life span is required'
+    }
+    return error;
+}
+
 export default function CreateDog(){
     const dispatch = useDispatch();
     const history = useHistory();
-    let types = useSelector((state) => state.temperaments);
-    let [input, setInput] = useState({
+    const types = useSelector((state) => state.temperaments);
+    const [error, setError] = useState({})
+    const [input, setInput] = useState({
         name: '',
-        min_height: '',
-        max_height: '',
-        min_weight: '',
-        max_weight: '',
+        minheight: 9,
+        maxheight: 120,
+        minweight: 1,
+        maxweight: 110,
         temperaments: [],
         image: '',
+        life_span: 0,
     })
 
   
@@ -29,13 +73,19 @@ export default function CreateDog(){
     } 
 
     function handleChange(d){
+        d.preventDefault()
         setInput({
             ...input,
             [d.target.name] : d.target.value
-        })
+        });
+        setError(validate({
+            ...input,
+            [d.target.name] : d.target.value
+        }))
     }
 
     function handleSelect(d){
+        d.preventDefault()
         setInput({
             ...input,
             temperaments: [...input.temperaments, d.target.value]
@@ -48,20 +98,23 @@ export default function CreateDog(){
         alert('Dog created succesfully!')
         setInput({
             name: '',
-            min_height: '',
-            max_height: '',
-            min_weight: '',
-            max_weight: '',
+            minheight: '',
+            maxheight: '',
+            minweight: '',
+            maxweight: '',
             temperaments: [],
             image: '',
+            life_span: '',
         })
         history.push('/home') // te lleva a la ruta indicada
     }
 
-    // let prueba = temperaments.map((temp)=>(
-    //     <option value={temp.name}>{temp.name}</option>
-    // ))
-
+    function handleDelete(temp){
+        setInput({
+            ...input,
+            temperaments: input.temperaments.filter(temper=>temper !== temp)
+        })
+    }
 
     useEffect(()=>{
         dispatch(getTemperaments())
@@ -80,35 +133,54 @@ export default function CreateDog(){
                         <input type= 'text'
                                value= {input.name}
                                name= 'name'
-                               onChange = {(d)=>handleChange(d)}/>     
+                               onChange = {(d)=>handleChange(d)}/>  
+                        {error.name &&(
+                            <p className = 'error'>{error.name}</p>
+                        )}   
                     </div>
                     <div>
                         <label>Min Height:</label>
                         <input type= 'number'
-                                value= {input.min_height}
-                                name= 'min height'
+                                value= {input.minheight}
+                                name= 'minheight'
                                 onChange = {(d)=>handleChange(d)}/>
+                        <label>cms</label>
+                        {error.minheight &&(
+                            <p className = 'error'>{error.minheight}</p>
+                        )}   
                     </div>
                     <div>
                         <label>Max Height:</label>
                         <input type= 'number'
-                                value= {input.max_height}
-                                name= 'max height'
+                                value= {input.maxheight}
+                                name= 'maxheight'
                                 onChange = {(d)=>handleChange(d)}/>
+                        <label>cms</label>
+                        {error.maxheight &&(
+                            <p className = 'error'>{error.maxheight}</p>
+                        )} 
                     </div>
                     <div>
                         <label>Min weight:</label>
                         <input type= 'number'
-                                value= {input.min_weight}
-                                name= 'min weight'
+                                value= {input.minweight}
+                                name= 'minweight'
                                 onChange = {(d)=>handleChange(d)}/>
+                        <label>kgs</label>
+                        {error.minweight &&(
+                            <p className = 'error'>{error.minweight}</p>
+                        )} 
                     </div>
                     <div>
                         <label>Max weight:</label>
                         <input type= 'number'
-                                value= {input.max_weight}
-                                name= 'max weight'
+                                value= {input.maxweight}
+                                name= 'maxweight'
                                 onChange = {(d)=>handleChange(d)}/>
+                        <label>kgs</label>
+                        {error.maxweight &&(
+                            <p className = 'error'>{error.maxweight}</p>
+                        )} 
                     </div>
                     <div>
                         <label>Image:</label>
@@ -118,18 +190,43 @@ export default function CreateDog(){
                                 name= 'image'
                                 onChange = {(d)=>handleChange(d)}/>
                         </label>
+                        {error.image &&(
+                            <p className = 'error'>{error.image}</p>
+                        )} 
                     </div>
-
+                    <div>
+                        <label>Life Span:</label>
+                        <label>
+                        <input type= 'number'
+                                value= {input.life_span}
+                                name= 'life_span'
+                                onChange = {(d)=>handleChange(d)}/>
+                        </label>
+                        <label>years</label>
+                        {error.life_span &&(
+                            <p className = 'error'>{error.life_span}</p>
+                        )} 
+                    </div>
                     <select onChange = {(d)=>handleSelect(d)}>
-                      {render(types)}   
+                      {render(types)}  
+                      {error.temperament &&(
+                            <p className = 'error'>{error.temperament}</p>
+                        )}  
                       </select>  
-                      <ul key=''>
+                      {/* <ul key=''>
                           <li key=''>{input.temperaments?.map(d => d + ', ')}
                           {console.log(input.temperaments)}
                           </li>
-                        </ul>
+                        </ul> */}
                     <button type = 'submit'>Create dog</button>
+                    {input.temperaments.map(temp=>
+                    <div className = 'divTemp'>
+                        <p>{temp}</p>
+                        <button onClick = {()=> handleDelete(temp)}>x</button>
+                    </div>
+                    )}
                 </form>
+                
         </div>
     )
 }

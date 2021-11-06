@@ -64,9 +64,11 @@ export default function Home(){
                         <Link to={'/home/' + dog.id}>
                         <Card name = {dog.name} 
                               temperament = {dog.temperament ? dog.temperament : dog.temperaments} 
-                              min_weight = {dog.min_weight} 
-                              max_weight = {dog.max_weight} 
-                              image = {dog.image} 
+                              minweight = {dog.minweight} 
+                              maxweight = {dog.maxweight} 
+                              minheight = {dog.minheight} 
+                              maxheight = {dog.maxheight}
+                              image = {dog.image ? dog.image : dog.image} 
                               key = {dog.id}
                         />
                         </Link>

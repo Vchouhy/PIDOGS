@@ -14,9 +14,10 @@ const getDogsApi = async()=>{
     return{
       id: dog.id,
       name: dog.name,
-      height: dog.height,
-      min_weight: parseInt(dog.weight.metric.slice(0,2)),
-      max_weight: parseInt(dog.weight.metric.slice(4)),
+      minheight: parseInt(dog.height.metric.slice(0,2)),
+      maxheight: parseInt(dog.height.metric.slice(4)),
+      minweight: parseInt(dog.weight.metric.slice(0,2)),
+      maxweight: parseInt(dog.weight.metric.slice(4)),
       life_span: dog.life_span,
       image: "https://cdn2.thedogapi.com/images/" + dog.reference_image_id + ".jpg",
       temperament: dog.temperament,
@@ -38,11 +39,12 @@ const getDogsDb = async()=>{
     newDogDb.push({
       id: dogDb[i].dataValues.id,
       name: dogDb[i].dataValues.name,
-      height: dogDb[i].dataValues.height,
-      min_weight: parseInt(dogDb[i].dataValues.weight.slice(0,2)),
-      max_weight: parseInt(dogDb[i].dataValues.weight.slice(4)),
+      minheight: dogDb[i].dataValues.minheight,
+      maxheight: dogDb[i].dataValues.maxheight,
+      minweight: dogDb[i].dataValues.minweight,
+      maxweight: dogDb[i].dataValues.maxweight,
       life_span: dogDb[i].dataValues.life_span,
-      image: 'https://cdn2.thedogapi.com/images'+ dogDb[i].dataValues.reference_image_id + '.jpg',
+      image: dogDb[i].dataValues.image,
       temperament: dogDb[i].dataValues.temperaments.map(e=>e.name)
     })
   }

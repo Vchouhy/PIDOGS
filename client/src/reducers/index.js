@@ -1,9 +1,10 @@
-import { GET_ALL_DOGS, GET_DOGS_BY_NAME, GET_TEMPERAMENTS, POST_DOG} from '../actions/index'
+import { GET_ALL_DOGS, GET_DOGS_BY_NAME, GET_TEMPERAMENTS, POST_DOG, GET_DETAILS} from '../actions/index'
 
 const initialState = { //declare initial state w/dogs
     dogs : [],
     temperaments : [],
-    searchDogs : []
+    searchDogs : [],
+    detail: []
 
 }
 
@@ -32,6 +33,11 @@ function rootReducer (state = initialState, action) {
         case POST_DOG:
             return{
                 ...state
+            }
+        case GET_DETAILS:
+            return{
+                ...state,
+                detail: action.payload
             }
         default: return state;
     }

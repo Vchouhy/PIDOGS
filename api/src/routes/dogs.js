@@ -23,11 +23,14 @@ router.get('/', async(req, res, next)=>{
 })
 
 router.post('/', async(req, res, next)=>{
-    let { name, height, weight, life_span, image, temperament } = req.body;
-    let newDog = await Dog.create({
+    let { name, minheight, maxheight ,maxweight , minweight, life_span, image, temperament } = req.body;
+    try{
+        let newDog = await Dog.create({
         name,
-        height,
-        weight,
+        minheight,
+        maxheight,
+        maxweight,
+        minweight,
         life_span,
         image,     
         })
@@ -38,11 +41,15 @@ router.post('/', async(req, res, next)=>{
    
     newDog.addTemperaments(temperamentDb)
     //console.log(temperamentDb)
-    res.send(newDog)
+    res.send(newDog)}
+    
+    catch(error){
+        next(error)
+    }
 })
 
 router.get('/:id', async (req,res)=>{
-        const {id} = req.params
+      try{  const {id} = req.params
         const everyDog = await getAllDogs()
         if(id){
             let dogId = await everyDog.filter(
@@ -51,6 +58,9 @@ router.get('/:id', async (req,res)=>{
             dogId.length?
             res.status(200).json(dogId):
             res.status(404).send('Dog not found')
+        }}
+        catch(error){
+            next(error)
         }
 })
 
