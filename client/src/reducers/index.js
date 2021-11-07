@@ -2,7 +2,7 @@ import { GET_ALL_DOGS, GET_DOGS_BY_NAME, GET_TEMPERAMENTS, POST_DOG, GET_DETAILS
 
 const initialState = { //declare initial state w/dogs
     dogs : [],
-    temperaments : [],
+    temperament : [],
     searchDogs : [],
     detail: []
 
@@ -27,7 +27,7 @@ function rootReducer (state = initialState, action) {
         case GET_TEMPERAMENTS:
             return{
                 ...state,
-                temperaments: action.payload
+                temperament: action.payload
             }
 
         case POST_DOG:

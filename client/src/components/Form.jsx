@@ -33,8 +33,8 @@ function validate(input){
     if(input.maxweight >=111){
         error.maxweight = 'Maximum weight is 110'
     }
-    if(!input.temperaments){
-        error.temperaments = 'Temperaments is required'
+    if(!input.temperament){
+        error.temperament = 'Temperaments is required'
     }
     if(!input.image){
         error.image = 'Image is required'
@@ -46,9 +46,10 @@ function validate(input){
 }
 
 export default function CreateDog(){
+
     const dispatch = useDispatch();
     const history = useHistory();
-    const types = useSelector((state) => state.temperaments);
+    const types = useSelector((state) => state.temperament);
     const [error, setError] = useState({})
     const [input, setInput] = useState({
         name: '',
@@ -56,12 +57,12 @@ export default function CreateDog(){
         maxheight: 120,
         minweight: 1,
         maxweight: 110,
-        temperaments: [],
+        temperament: [],
         image: '',
         life_span: 0,
     })
 
-  
+    console.log(types)
     const render = (types)=>{
         let temperamentos = types?.map((types)=>{
                 return (
@@ -88,7 +89,7 @@ export default function CreateDog(){
         d.preventDefault()
         setInput({
             ...input,
-            temperaments: [...input.temperaments, d.target.value]
+            temperament: input.temperament.concat(d.target.value)
         })
     }
 
@@ -102,17 +103,18 @@ export default function CreateDog(){
             maxheight: '',
             minweight: '',
             maxweight: '',
-            temperaments: [],
+            temperament: [],
             image: '',
             life_span: '',
         })
         history.push('/home') // te lleva a la ruta indicada
     }
 
-    function handleDelete(temp){
+    function handleDelete(e){
+        e.preventDefault()
         setInput({
             ...input,
-            temperaments: input.temperaments.filter(temper=>temper !== temp)
+            temperament: input.temperament.filter(temper=>temper !== e.target.id)
         })
     }
 
@@ -219,10 +221,10 @@ export default function CreateDog(){
                           </li>
                         </ul> */}
                     <button type = 'submit'>Create dog</button>
-                    {input.temperaments.map(temp=>
+                    {input.temperament?.map(temp=> 
                     <div className = 'divTemp'>
                         <p>{temp}</p>
-                        <button onClick = {()=> handleDelete(temp)}>x</button>
+                        <button id={temp} onClick = {(e)=> handleDelete(e)}>x</button>
                     </div>
                     )}
                 </form>

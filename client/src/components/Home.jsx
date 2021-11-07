@@ -63,7 +63,7 @@ export default function Home(){
                         <div className = 'Imagen'>
                         <Link to={'/home/' + dog.id}>
                         <Card name = {dog.name} 
-                              temperament = {dog.temperament ? dog.temperament : dog.temperaments} 
+                              temperament = {dog.temperament ? dog.temperament : dog.temperament} 
                               minweight = {dog.minweight} 
                               maxweight = {dog.maxweight} 
                               minheight = {dog.minheight} 

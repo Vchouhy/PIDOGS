@@ -8,16 +8,18 @@ const axios = require('axios')
 router.get('/', async(req, res, next)=>{
     try{
     const temperamentApi = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key={YOUR_API_KEY}`);
-    const temperaments = temperamentApi.data.map(dog => dog.temperament)
+
+    const temperament = temperamentApi.data.map(dog => dog.temperament)
         .join(', ')
         .split(', ');
-        temperaments.forEach((dog)=>{ 
+
+        temperament.forEach((dog)=>{ 
             Temperament.findOrCreate({
             where: { name: dog }
             })
     });
-    const allTemperaments = await Temperament.findAll();
-    res.status(200).send(allTemperaments)
+    const allTemperament = await Temperament.findAll();
+    res.status(200).send(allTemperament)
     }
     catch(error){
         next(error)

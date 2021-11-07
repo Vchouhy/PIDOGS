@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Landing  from './components/Landing'
 import  Home from './components/Home'
 import Form from './components/Form'
-//import Details from './components/Details'
+import Details from './components/Details'
 
 function App() {
   return (
@@ -13,8 +13,8 @@ function App() {
       <Switch>
         <Route exact path = '/' component = {Landing}/> 
         <Route exact path = '/home' component = {Home}/>
-        <Route path = '/dogs' component = {Form}/>
-        {/* <Route path = '/detail' component = {Details}/> */}
+        <Route exact path = '/dogs/form' component = {Form}/>
+        <Route path = '/home/:id' component = {Details}/>
      </Switch>
     </div>
     </BrowserRouter>

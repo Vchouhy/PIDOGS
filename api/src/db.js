@@ -36,11 +36,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Temperament.belongsToMany(Dog, {
-  through: 'dogTemperaments'
+  through: 'dogTemperament'
 })
 
 Dog.belongsToMany(Temperament, {
-    through: 'dogTemperaments'
+    through: 'dogTemperament'
 })
 
 
