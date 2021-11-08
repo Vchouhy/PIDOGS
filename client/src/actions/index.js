@@ -4,7 +4,10 @@ export const GET_DOGS_BY_NAME = 'GET_DOGS_BY_NAME'
 export const GET_TEMPERAMENTS = 'GET_TEMPERAMENTS'
 export const POST_DOG = 'POST_DOG'
 export const GET_DETAILS = 'GET_DETAILS'
-
+export const FILTER_CREATED = 'FILTER_CREATED'
+export const ORDER_ASC_DES = 'ORDER_ASC_DES'
+export const ORDER_BY_WEIGHT = 'ORDER_BY_WEIGHT'
+export const FILTER_BY_TEMPERAMENTS = 'FILTER_BY_TEMPERAMENTS'
 
 export function getAllDogs(){
     return async function(dispatch){
@@ -42,10 +45,11 @@ export function postDog(payload){
 
 export function getTemperaments(){
     return async function(dispatch){ 
-        var temp = await axios('http://localhost:3001/api/temperament')
+        var temp = await axios('http://localhost:3001/api/temperament', {})
         return dispatch({
             type: GET_TEMPERAMENTS,
-            payload: temp.data
+            payload: temp.data,
+
         })
     }
     
@@ -66,11 +70,29 @@ export function getDetail(id){
     } 
 
 }
+export function filterCreated(payload){
+    return {
+        type: FILTER_CREATED,
+        payload
+    }
+}
 
+export function orderAscDes(payload){
+    return{
+        type: ORDER_ASC_DES,
+        payload
+    }
+}
 
-// export function filterDogsByTemperament(payload){
-//     return{
-//         type: 'FILTER_BY_TEMPERAMENT',
-//         payload
-//     }
-//}
+export function orderByWeight(payload){
+    return {
+        type: ORDER_BY_WEIGHT,
+        payload
+    }
+}
+export function filterDogsByTemperaments(payload){
+    return{
+        type: FILTER_BY_TEMPERAMENTS,
+        payload
+    }
+}

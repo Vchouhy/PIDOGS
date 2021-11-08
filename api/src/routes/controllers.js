@@ -9,7 +9,7 @@ const e = require('express');
 
 //traigo los dogs de la API
 const getDogsApi = async()=>{
-  const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key={YOUR_API_KEY}`);
+  const apiUrl = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${YOUR_API_KEY}`);
   const apiInfo = await apiUrl.data.map(dog=>{
     return{
       id: dog.id,

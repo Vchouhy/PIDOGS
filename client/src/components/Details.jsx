@@ -24,12 +24,12 @@ export default function Detail(props){
                 detailDog.length === 0 ? <p>Loading...</p> :
                 detailDog.length > 0 &&
                 <div>
-                    <h1>{detailDog[0].name}</h1>
+                    <h1>Breed: {detailDog[0].name}</h1>
                     <img src = {detailDog[0].image} alt='img not found'/>
-                    <h2>{!detailDog[0].createdInDb ? detailDog[0].temperament + ' ' : detailDog[0].temperament.map(e => e.name + (' '))}</h2>
-                    <h2>{detailDog[0].minweight}{detailDog[0].maxweight}</h2>
-                    <h2>{detailDog[0].minheight}{detailDog[0].maxheight}</h2>
-                    <h2>{detailDog[0].life_span}{detailDog[0].life_span}</h2>
+                    <h2>Temperaments: {!detailDog[0].createdInDb ? detailDog[0].temperament + ' ' : detailDog[0].temperament.map(e => e.name + (' '))}</h2>
+                    <h2>Weight: {detailDog[0].minweight} kgs -  {detailDog[0].maxweight} kgs</h2>
+                    <h2>Height: {detailDog[0].minheight} cm - {detailDog[0].maxheight} cm</h2>
+                    <h2>Life Span: {detailDog[0].life_span}</h2>
                 </div>
             }
             <Link to = '/home'>

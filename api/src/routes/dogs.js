@@ -11,6 +11,7 @@ router.get('/', async(req, res, next)=>{
     if(name){
         let dogName = await allDogs.filter(dog => dog.name.toLowerCase().includes(name.toLowerCase())); //pregunto si incluye el nombre que me mandan por query
         dogName.length ?
+
         res.status(200).send(dogName) :
         res.status(404).send('Dog not found')
     }
