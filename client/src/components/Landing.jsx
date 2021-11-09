@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Button } from "../components/styledcomponents/StyledComponents";
 
 export default function LandingPage(){
     return(
@@ -8,7 +9,7 @@ export default function LandingPage(){
                 Welcome to my Dog's APP
             </h1>
             <Link to = '/home'>
-                <button>Click to enter</button>
+                <Button>Click to enter</Button>
             </Link>
         </div>
     )

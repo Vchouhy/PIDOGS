@@ -4,52 +4,12 @@ import { postDog, getTemperaments } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 
 
-function validate(input){
-    let error = {};
-    if(!input.name){
-        error.name = 'Name is required'
-    }
-    if(!input.minheight){
-        error.minheight = 'Minimum height is required'
-    }
-    if(input.minheight <= 8){
-        error.minheight = 'Height must be 9 or greater than 9'
-    }
-    if(!input.maxheight){
-        error.maxheight = 'Minimum height is required'
-    }
-    if(input.maxheight >=121){
-        error.maxheight = 'Height must be smaller than 120cm'
-    }
-    if(!input.minweight){
-        error.minweight = 'Minimum weight is required'
-    }
-    if(!input.maxweight){
-        error.maxweight = 'Maximum weight is required'
-    }
-    if(input.minweight <=0.9){
-        error.minweight = 'Minimum weight 1'
-    }
-    if(input.maxweight >=111){
-        error.maxweight = 'Maximum weight is 110'
-    }
-    if(!input.temperament){
-        error.temperament = 'Temperaments is required'
-    }
-    if(!input.image){
-        error.image = 'Image is required'
-    }
-    if(!input.life_span){
-        error.life_span = 'Life span is required'
-    }
-    return error;
-}
 
 export default function CreateDog(){
-
     const dispatch = useDispatch();
     const history = useHistory();
     const types = useSelector((state) => state.temperament);
+    //const [temps, setTemps] = useState('All')
     const [error, setError] = useState({})
     const [input, setInput] = useState({
         name: '',
@@ -60,15 +20,54 @@ export default function CreateDog(){
         temperament: [],
         image: '',
         life_span: 0,
-    })
-    const render = (types)=>{
-        let temperamentos = types?.map((types)=>{
-                return (
-                <option value = {types.name}> {types.name} </option>
-                )
-        })
-        return temperamentos        
-    } 
+    }) 
+
+    const validate = (input) => {
+        let error = {};
+        if(input.name.length < 1){
+            error.name = 'Name is required'
+        }
+        if(!input.minheight){
+            error.minheight = 'Minimum height is required'
+        }
+        if(input.minheight <= 8){
+            error.minheight = 'Height must be 9 or greater than 9'
+        }
+        if(!input.maxheight){
+            error.maxheight = 'Minimum height is required'
+        }
+        if(input.maxheight >=121){
+            error.maxheight = 'Height must be smaller than 120cm'
+        }
+        if(!input.minweight){
+            error.minweight = 'Minimum weight is required'
+        }
+        if(!input.maxweight){
+            error.maxweight = 'Maximum weight is required'
+        }
+        if(input.minweight <=0.9){
+            error.minweight = 'Minimum weight 1'
+        }
+        if(input.maxweight >=111){
+            error.maxweight = 'Maximum weight is 110'
+        }
+        if(input.temperament === null){
+            error.temperament = 'Temperaments is required'
+        }
+        if(!input.image){
+            error.image = 'Image is required'
+        }
+        if(input.life_span < 1){
+            error.life_span = 'Life span is required'
+        }
+        return error;
+    }
+
+    const handleDisabled = () => {
+        if(input.name !== '' && Object.keys(error).length === 0 && input.temperament !== undefined){
+            return false
+        } return true;
+    }
 
     function handleChange(d){
         d.preventDefault()
@@ -84,12 +83,14 @@ export default function CreateDog(){
 
     function handleSelect(d){
         d.preventDefault()
-        setInput({
+        const newTemperament = {
             ...input,
             temperament: input.temperament.concat(d.target.value)
-        })
+        }
+        setInput(newTemperament);
+        setError(validate(newTemperament))
     }
-
+    
     function handleSubmit(d){
         d.preventDefault();
         dispatch(postDog(input))
@@ -206,17 +207,50 @@ export default function CreateDog(){
                             <p className = 'error'>{error.life_span}</p>
                         )} 
                     </div>
+                        <label>Temperament</label>
+                    
+        
+                {/* <select value={temps} onChange={(e) => handleFilterTemperament(e)}>
+                  <option value="All" disabled>All</option>
+                    {temperamentos.map((temp, index) => (
+                      <option onClick = {(e)=> handleClick(e)} key={index}>
+                        {temp.name}
+                      </option>
+                    ))}
+                       
+                  </select> */}
+                    
+
+                    {/* const render = (types)=>{
+        let temperamentos = types?.map((types, index)=>{
+                return (
+                <option key = {index} value = {types.name}> {types.name} </option>
+                )
+        })
+        return temperamentos        
+    } */}
+
                     <select onChange = {(d)=>handleSelect(d)}>
-                      {render(types)}  
-                      {error.temperament &&(
+                    <option value="All">All</option>    
+                      {types?.map((types, index)=>{
+                             return(
+                                <option key = {index} value = {types.name}> {types.name} </option>
+                                )
+                        })}  
+                      {error.temperament && (
                             <p className = 'error'>{error.temperament}</p>
                         )}  
-                      </select>  
-                    <button type = 'submit' >Create dog</button>
-                    {input.temperament?.map(temp=> 
-                    <div className = 'divTemp'>
+                      </select>
+                      <br/>
+                   {/* {(Object.keys(error).length < 1) ? <button type='submit' disabled={handleDisabled()}>Create Dog</button> : <button type='submit'>Create Dog</button>} */}
+                   {/* {(Object.keys(error).length > 1) ? <button type='submit' disabled={handleDisabled()}>Create Dog</button> : <button type='submit'>Create Dog</button>} */}
+                   <button disabled = {handleDisabled()}>create</button>
+                    {/* {!error ? <button type = 'submit' >Create dog</button> : <button type = 'submit' disabled>Create dog</button>}     */}
+                    {console.log(Object.keys(error))}
+                    {input.temperament?.map((temp, index)=> 
+                    <div key = {index} className = 'divTemp'>
                         <p>{temp}</p>
-                        <button id={temp} onClick = {(e)=> handleDelete(e)}>x</button>
+                        <button id={temp} onClick = {(e)=> handleDelete(e) }>x</button>
                     </div>
                     )}
                 </form>

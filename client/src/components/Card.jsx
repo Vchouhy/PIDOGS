@@ -6,7 +6,7 @@ export default function Card({image, name, temperament, minweight, maxweight, mi
         <div >
             <h3>{name}</h3>
   
-            <h4>{temperament}</h4>
+            <h4>{Array.isArray(temperament)? temperament.join(', ' ) : temperament}</h4>
 
             <h4>min:{minweight} kg - max:{maxweight} kg</h4>
             <h4>min:{minheight} cm - max:{maxheight} cm</h4>
