@@ -45,7 +45,8 @@ const getDogsDb = async()=>{
       maxweight: dogDb[i].dataValues.maxweight,
       life_span: dogDb[i].dataValues.life_span,
       image: dogDb[i].dataValues.image,
-      temperament: dogDb[i].dataValues.temperaments.map(e=>e.name)
+      temperament: dogDb[i].dataValues.temperaments.map(e=>e.name),
+      createdInDataBase: dogDb[i].dataValues.createdInDataBase
     })
   }
   return newDogDb;

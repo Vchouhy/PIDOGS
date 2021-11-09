@@ -21,7 +21,7 @@ function rootReducer (state = initialState, action) {
         case GET_DOGS_BY_NAME:
             return{
                 ...state,
-                searchDogs: action.payload
+                dogs: action.payload
             }
         
         case GET_TEMPERAMENTS:
@@ -42,11 +42,17 @@ function rootReducer (state = initialState, action) {
             }
 
         case FILTER_CREATED:
-            const allDogsCreated = state.dogs
-            const createdFilter = action.payload === 'existent' ? allDogsCreated.filter((e) => e.createdInDataBase) : allDogsCreated.filter((e) => !e.createdInDataBase)
+            const allDogsCreated = state.searchDogs
+            const createdFilter = action.payload === 'created' ? 
+            allDogsCreated.filter((e) => e.createdInDataBase) 
+                                :action.payload === 'existent' ?
+            allDogsCreated.filter((e) => !e.createdInDataBase) 
+                                :action.payload === 'allbreeds' &&
+            allDogsCreated
             return{
                 ...state,
-                dogs: action.payload === 'allbreeds' ? allDogsCreated : createdFilter
+                dogs: createdFilter,
+
             }
 
         case ORDER_ASC_DES:
@@ -90,12 +96,14 @@ function rootReducer (state = initialState, action) {
                 }
         
             case FILTER_BY_TEMPERAMENTS:
-                const allDogs = state.temperament
-                const temperamentFiltered = allDogs.filter((dog)=>
-                dog.temperament?.includes(action.payload))
+                const allDogs = state.searchDogs
+                const temperamentFiltered = 
+                action.payload === 'All' ? allDogs
+                : allDogs.filter((e)=>
+                e.temperament?.includes(action.payload))              
                 return {
                     ...state,
-                    dogs: temperamentFiltered
+                    dogs: temperamentFiltered,
                 }
         default: return state;
     }

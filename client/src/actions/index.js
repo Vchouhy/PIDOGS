@@ -45,12 +45,16 @@ export function postDog(payload){
 
 export function getTemperaments(){
     return async function(dispatch){ 
-        var temp = await axios('http://localhost:3001/api/temperament', {})
+       try{
+            var temp = await axios('http://localhost:3001/api/temperament', {})
+            //console.log(temp.data)
         return dispatch({
             type: GET_TEMPERAMENTS,
             payload: temp.data,
-
-        })
+            
+        })} catch(error){
+            console.log(error)
+        }
     }
     
 }

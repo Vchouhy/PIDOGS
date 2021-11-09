@@ -61,14 +61,11 @@ export default function CreateDog(){
         image: '',
         life_span: 0,
     })
-
-    console.log(types)
     const render = (types)=>{
         let temperamentos = types?.map((types)=>{
                 return (
                 <option value = {types.name}> {types.name} </option>
                 )
-
         })
         return temperamentos        
     } 
@@ -215,12 +212,7 @@ export default function CreateDog(){
                             <p className = 'error'>{error.temperament}</p>
                         )}  
                       </select>  
-                      {/* <ul key=''>
-                          <li key=''>{input.temperaments?.map(d => d + ', ')}
-                          {console.log(input.temperaments)}
-                          </li>
-                        </ul> */}
-                    <button type = 'submit'>Create dog</button>
+                    <button type = 'submit' >Create dog</button>
                     {input.temperament?.map(temp=> 
                     <div className = 'divTemp'>
                         <p>{temp}</p>

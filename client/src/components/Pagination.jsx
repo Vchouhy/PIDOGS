@@ -13,7 +13,7 @@ export default function Pagination({dogsPerPage, allDogs, pagination}){
                 {pageNumber  && pageNumber.map(number =>{
                     return(
                     <li key = {number} className = 'Number'>
-                    <a onClick = {()=> pagination(number)} > {number} </a>
+                    <button onClick = {()=> pagination(number)} > {number} </button>
                     </li>)
                 })}
             </ul>
