@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom'
 import Card from "./Card";
 import Pagination from "./Pagination";
 import SearchBar from "./SearchBar";
+import LandingCss from './Home.module.css'
+
 
 
 export default function Home(){
@@ -68,9 +70,9 @@ export default function Home(){
 
 
     return(
-        <div>
+        <div className={LandingCss.gral}>
             <Link to = '/dogs/form'>Create a new dog!</Link>
-            <h1>FUNCIONA TODO</h1>
+            <h1>Find your next dog!</h1>
             <button onClick = {e=>{handleClick(e)}}>
                 Reload all dogs
             </button>

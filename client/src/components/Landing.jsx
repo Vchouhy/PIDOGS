@@ -1,15 +1,17 @@
 import React from "react";
+
 import { Link } from "react-router-dom";
-import { Button } from "../components/styledcomponents/StyledComponents";
+import LandingCss from './Landing.module.css'
+
 
 export default function LandingPage(){
     return(
-        <div>
-            <h1>
+        <div className = {LandingCss.landing}>
+            <h1 className = {LandingCss.h1}> 
                 Welcome to my Dog's APP
             </h1>
             <Link to = '/home'>
-                <Button>Click to enter</Button>
+                <button className = 'btn'>Click to enter</button>
             </Link>
         </div>
     )

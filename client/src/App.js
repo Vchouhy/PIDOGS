@@ -5,6 +5,7 @@ import Landing  from './components/Landing'
 import  Home from './components/Home'
 import Form from './components/Form'
 import Details from './components/Details'
+import "./App.css"
 
 function App() {
   return (
