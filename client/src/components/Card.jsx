@@ -1,17 +1,24 @@
 import React from "react";
+import CardCss from './Card.module.css'
+import { Link } from 'react-router-dom'
+import { getDetail } from "../actions";
+import { useDispatch} from 'react-redux';
 
 
-export default function Card({image, name, temperament, minweight, maxweight, minheight, maxheight}){
+export default function Card({image, name, temperament, minweight, maxweight, minheight, maxheight, id}){
+    const dispatch = useDispatch();
     return(
-        <div >
-            <h3>{name}</h3>
-  
-            <h4>{Array.isArray(temperament)? temperament.join(', ' ) : temperament}</h4>
-
-            <h4>min:{minweight} kg - max:{maxweight} kg</h4>
-            <h4>min:{minheight} cm - max:{maxheight} cm</h4>
-
-            <img  src = {image} alt = 'img not found' width = '10%' height = '10%'/>
+        
+        <div className={CardCss.card}>
+            <Link className = {CardCss.link} to={'/home/' + id} onClick={()=>dispatch(getDetail(id))}> 
+            <h2 className={CardCss.title}>Breed: {name}</h2>
+            <h5 className={CardCss.temperament}>Temperament: {Array.isArray(temperament)? temperament.join(', ' ) : temperament}</h5>
+            
+            <img  className = {CardCss.img} src = {image} alt = 'img not found' />
+            <h5 className={CardCss.weight}>Min weight:{minweight} kg - Max weight:{maxweight} kg</h5>
+            <h5 className={CardCss.weight}>Min weight:{minheight} cm - Max weight:{maxheight} cm</h5>
+            </Link>
         </div>
+    
     )
 }

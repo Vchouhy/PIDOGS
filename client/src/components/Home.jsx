@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import Card from "./Card";
 import Pagination from "./Pagination";
 import SearchBar from "./SearchBar";
-import LandingCss from './Home.module.css'
+import HomeCss from './Home.module.css'
 
 
 
@@ -70,25 +70,36 @@ export default function Home(){
 
 
     return(
-        <div className={LandingCss.gral}>
-            <Link to = '/dogs/form'>Create a new dog!</Link>
+        <div className={HomeCss.gral}>
+
             <h1>Find your next dog!</h1>
-            <button onClick = {e=>{handleClick(e)}}>
-                Reload all dogs
+            <Link to = '/dogs/form' className={HomeCss.button1}>Create a new dog!</Link>
+            <br/>
+            <button className={HomeCss.button}onClick = {e=>{handleClick(e)}}>
+                RELOAD ALL DOGS
             </button>
-            <div> 
-                <select value = {breeds} onChange = {e => handleFilterCreated(e)}>
+            <br/>
+            <br/>
+            <div className = {HomeCss.tit}>FILTERS</div>
+            <div className = {HomeCss.divgral}>
+            <br/>
+            <div className = {HomeCss.tit}>By breeds:
+                <select className={HomeCss.select} value = {breeds} onChange = {e => handleFilterCreated(e)}>
+                    
                     <option value = 'allbreeds'>All Breeds</option>
                     <option value = 'existent'>Api Breeds</option>
                     <option value = 'created'>Created Breeds</option>
-
                 </select>
-                <select value ={order}onChange={e=> handleSortWeight(e)}> 
+            </div>
+            <div className = {HomeCss.tit}>By weight:
+                <select className={HomeCss.select} value ={order}onChange={e=> handleSortWeight(e)}> 
+                <br/>
                     <option value = 'weightasc'>Weight Asc</option>
                     <option value = 'weightdes'>Weight Desc</option>
                 </select>
-                <div>
-                  <select value={temps} onChange={(e) => handleFilterTemperament(e)}>
+            </div>    
+            <div className = {HomeCss.tit}>By temperament :
+                  <select className={HomeCss.select} value={temps} onChange={(e) => handleFilterTemperament(e)}>
                   <option value="All">All</option>
                     {temperamentos.map((temp, index) => (
                       <option onClick = {(e)=> handleClick(e)} key={index}>
@@ -97,37 +108,42 @@ export default function Home(){
                     ))}
                        
                   </select>
-                  </div>
-
-                <select onChange = {e => handleSort(e)}>
+            </div>
+            <div className = {HomeCss.tit}>Az-Za:
+                <select className={HomeCss.select} onChange = {e => handleSort(e)}>
                     <option value = 'ascendent'>Ascendent</option>
                     <option value = 'descendent'>Descendent</option>
                 </select>
-                <Pagination dogsPerPage = {dogsPerPage} // props that needs the component to render properly
-                            allDogs = {allDogs.length}
-                            pagination = {pagination}
-                />
-                <SearchBar/>
-             
+            </div>    
+            </div>    
+                <SearchBar />
+            <div className = {HomeCss.divcard}>
                 {currentDog?.map((dog, index)=>{
                         return(
-                        <div className = 'Imagen' key={index}>
-                        <Link to={'/home/' + dog.id}>
-                        <Card name = {dog.name} 
+                        <div  key={index}>
+                        {/* <Link className = {HomeCss.link} to={'/home/' + dog.id}> */}
+                        <Card 
+                              name = {dog.name} 
                               temperament = {dog.temperament ? dog.temperament : dog.temperament} 
                               minweight = {dog.minweight} 
                               maxweight = {dog.maxweight} 
                               minheight = {dog.minheight} 
                               maxheight = {dog.maxheight}
                               image = {dog.image ? dog.image : dog.image} 
-                              key = {dog.id}
+                              id = {dog.id}
                         />
-                        </Link>
+                        {/* </Link> */}
                         </div>
                     )})
                 }
                
             </div>
+            <div className={HomeCss.paginado}>
+            <Pagination dogsPerPage = {dogsPerPage} // props that needs the component to render properly
+                            allDogs = {allDogs.length}
+                            pagination = {pagination}
+                />
+            </div>    
         </div>
     )
 

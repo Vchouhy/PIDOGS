@@ -11,7 +11,7 @@ export default function LandingPage(){
                 Welcome to my Dog's APP
             </h1>
             <Link to = '/home'>
-                <button className = 'btn'>Click to enter</button>
+                <button className = {LandingCss.btn}>Click to enter</button>
             </Link>
         </div>
     )

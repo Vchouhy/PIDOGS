@@ -9,15 +9,15 @@ export default function Pagination({dogsPerPage, allDogs, pagination}){
     }
 
     return(
-        <nav>
+        <div className={modules.Pagination}>
             <ul className = {modules.Pagination}>
                 {pageNumber  && pageNumber.map(number =>{
                     return(
-                    <li key = {number} className = 'Number'>
+                    <li key = {number} className = {modules.Pagination}>
                     <button className = {modules.btna} onClick = {()=> pagination(number)} > {number} </button>
                     </li>)
                 })}
             </ul>
-        </nav>
+        </div>
     )
 }
