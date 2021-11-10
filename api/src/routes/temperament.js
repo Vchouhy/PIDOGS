@@ -26,12 +26,6 @@ router.get('/', async(req, res, next)=>{
     }
 })
 
-// router.post('/', async(req, res, next)=>{ //el next va al control de errores
-//     const { name } = req.body;
-//     const newTemperament = await Temperament.create({
-//         name
-//     })
-//     res.send(newTemperament)
-// })
+
 
 module.exports = router;
