@@ -25,7 +25,7 @@ export default function Detail(props){
                 detailDog.length > 0 &&
                 <div className={DetailsCss.contenedor}>
                     <h1 className={DetailsCss.h1}>Breed: {detailDog[0].name}</h1>
-                    <img classNAme={DetailsCss.img}src = {detailDog[0].image} alt='img not found'/>
+                    <img src = {detailDog[0].image} alt='img not found'/>
                     <h2 className={DetailsCss.h2}>Temperaments: {!detailDog[0].createdInDb ? detailDog[0].temperament + ', ' : detailDog[0].temperament.map(e => e.name + (' '))}</h2>
                     <h2 className={DetailsCss.h2}>Weight: {detailDog[0].minweight} kgs -  {detailDog[0].maxweight} kgs</h2>
                     <h2 className={DetailsCss.h2}>Height: {detailDog[0].minheight} cm - {detailDog[0].maxheight} cm</h2>

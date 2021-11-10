@@ -43,7 +43,7 @@
     margin: 1rem;
 
 }
-.img{
-    width: 12rem;
-    height: 12rem;
+.contenedor > img{
+    width: 50%;
+    height: 50%;
 }
