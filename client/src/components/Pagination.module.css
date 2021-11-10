@@ -3,6 +3,7 @@
     justify-content: space-around;
     align-items: center;
     align-content: center;
+  
     /* width: 100vw; */
 }
 .Number{
@@ -11,7 +12,7 @@
 }
 .btna{
     /* justify-content: space-around; */
-    background-color: #FAFAED;
+    background-color: #c6c6c6;
     border-color: #7A7A72;
     color: #7A7A72;
     border-radius: 0.5rem;

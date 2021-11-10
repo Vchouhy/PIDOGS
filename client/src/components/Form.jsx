@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
-import { postDog, getTemperaments } from "../actions/index";
+import { useHistory } from "react-router-dom";
+import { postDog, getTemperaments, getAllDogs } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import FormCss from './Form.module.css';
 
 
 
@@ -25,40 +26,40 @@ export default function CreateDog(){
     const validate = (input) => {
         let error = {};
         if(input.name.length < 1){
-            error.name = 'Name is required'
+            error.name = '*Name is required'
         }
         if(!input.minheight){
-            error.minheight = 'Minimum height is required'
+            error.minheight = '*Minimum height is required'
         }
         if(input.minheight <= 8){
-            error.minheight = 'Height must be 9 or greater than 9'
+            error.minheight = '*Height must be 9 or greater than 9'
         }
         if(!input.maxheight){
-            error.maxheight = 'Minimum height is required'
+            error.maxheight = '*Minimum height is required'
         }
         if(input.maxheight >=121){
-            error.maxheight = 'Height must be smaller than 120cm'
+            error.maxheight = '*Height must be smaller than 120cm'
         }
         if(!input.minweight){
-            error.minweight = 'Minimum weight is required'
+            error.minweight = '*Minimum weight is required'
         }
         if(!input.maxweight){
-            error.maxweight = 'Maximum weight is required'
+            error.maxweight = '*Maximum weight is required'
         }
         if(input.minweight <=0.9){
-            error.minweight = 'Minimum weight 1'
+            error.minweight = '*Minimum weight 1'
         }
         if(input.maxweight >=111){
-            error.maxweight = 'Maximum weight is 110'
+            error.maxweight = '*Maximum weight is 110'
         }
         if(input.temperament === null){
-            error.temperament = 'Temperaments is required'
+            error.temperament = '*Temperaments is required'
         }
         if(!input.image){
-            error.image = 'Image is required'
+            error.image = '*Image is required'
         }
         if(input.life_span < 1){
-            error.life_span = 'Life span is required'
+            error.life_span = '*Life span is required'
         }
         return error;
     }
@@ -121,120 +122,105 @@ export default function CreateDog(){
     },[dispatch])
 
     return(
-        <div>
-            <Link to = '/home'> 
-                <button>Return</button>
-            </Link>
-                <h2>Create your own dog!</h2>
+        <div className={FormCss.contenedor}>
+            <div className = {FormCss.divgral}>
+                <h2 className = {FormCss.h2}>Create your own dog!</h2>
                 <form
+                    className = {FormCss.form}
                     onSubmit = {(d) =>handleSubmit(d)}>
-                    <div>
-                        <label>Breed:</label>
+                    <div className = {FormCss.input}>
+                        <label>Breed: </label>
                         <input type= 'text'
                                value= {input.name}
                                name= 'name'
-                               onChange = {(d)=>handleChange(d)}/>  
+                               onChange = {(d)=>handleChange(d)}
+                               />  
                         {error.name &&(
                             <p className = 'error'>{error.name}</p>
                         )}   
                     </div>
-                    <div>
-                        <label>Min Height:</label>
+                    <div className = {FormCss.input}>
+                        <label>Min Height: </label>
                         <input type= 'number'
                                 value= {input.minheight}
                                 name= 'minheight'
-                                onChange = {(d)=>handleChange(d)}/>
-                        <label>cms</label>
+                                onChange = {(d)=>handleChange(d)}
+                                />
+                        <label> cms</label>
                         {error.minheight &&(
                             <p className = 'error'>{error.minheight}</p>
                         )}   
                     </div>
-                    <div>
-                        <label>Max Height:</label>
+                    <div className = {FormCss.input}>
+                        <label>Max Height: </label>
                         <input type= 'number'
                                 value= {input.maxheight}
                                 name= 'maxheight'
-                                onChange = {(d)=>handleChange(d)}/>
-                        <label>cms</label>
+                                onChange = {(d)=>handleChange(d)}
+                                />
+                        <label> cms</label>
                         {error.maxheight &&(
                             <p className = 'error'>{error.maxheight}</p>
                         )} 
                     </div>
-                    <div>
-                        <label>Min weight:</label>
+                    <div className = {FormCss.input}>
+                        <label>Min weight: </label>
                         <input type= 'number'
                                 value= {input.minweight}
                                 name= 'minweight'
-                                onChange = {(d)=>handleChange(d)}/>
-                        <label>kgs</label>
+                                onChange = {(d)=>handleChange(d)}
+                                />
+                        <label> kgs</label>
                         {error.minweight &&(
                             <p className = 'error'>{error.minweight}</p>
                         )} 
                     </div>
-                    <div>
-                        <label>Max weight:</label>
+                    <div className = {FormCss.input}>
+                        <label>Max weight: </label>
                         <input type= 'number'
                                 value= {input.maxweight}
                                 name= 'maxweight'
-                                onChange = {(d)=>handleChange(d)}/>
-                        <label>kgs</label>
+                                onChange = {(d)=>handleChange(d)}
+                                />
+                        <label> kgs</label>
                         {error.maxweight &&(
                             <p className = 'error'>{error.maxweight}</p>
                         )} 
                     </div>
-                    <div>
-                        <label>Image:</label>
+                    <div className = {FormCss.input}>
+                        <label>Image: </label>
                         <label>
                         <input type= 'text'
                                 value= {input.image}
                                 name= 'image'
-                                onChange = {(d)=>handleChange(d)}/>
+                                onChange = {(d)=>handleChange(d)}
+                                />
                         </label>
                         {error.image &&(
                             <p className = 'error'>{error.image}</p>
                         )} 
                     </div>
-                    <div>
-                        <label>Life Span:</label>
+                    <div className = {FormCss.input}>
+                        <label>Life Span: </label>
                         <label>
                         <input type= 'number'
                                 value= {input.life_span}
                                 name= 'life_span'
-                                onChange = {(d)=>handleChange(d)}/>
+                                onChange = {(d)=>handleChange(d)}
+                                />
                         </label>
-                        <label>years</label>
+                        <label> years</label>
                         {error.life_span &&(
                             <p className = 'error'>{error.life_span}</p>
                         )} 
                     </div>
-                        <label>Temperament</label>
-                    
-        
-                {/* <select value={temps} onChange={(e) => handleFilterTemperament(e)}>
-                  <option value="All" disabled>All</option>
-                    {temperamentos.map((temp, index) => (
-                      <option onClick = {(e)=> handleClick(e)} key={index}>
-                        {temp.name}
-                      </option>
-                    ))}
-                       
-                  </select> */}
-                    
-
-                    {/* const render = (types)=>{
-        let temperamentos = types?.map((types, index)=>{
-                return (
-                <option key = {index} value = {types.name}> {types.name} </option>
-                )
-        })
-        return temperamentos        
-    } */}
-
-                    <select onChange = {(d)=>handleSelect(d)}>
+                    <div className={FormCss.input}>
+                        <label>Temperaments: </label>
+                    <select className={FormCss.input} onChange = {(d)=>handleSelect(d)} >
                     <option value="All">All</option>    
                       {types?.map((types, index)=>{
                              return(
-                                <option key = {index} value = {types.name}> {types.name} </option>
+                                <option  key = {index} value = {types.name}> {types.name} </option>
                                 )
                         })}  
                       {error.temperament && (
@@ -242,19 +228,22 @@ export default function CreateDog(){
                         )}  
                       </select>
                       <br/>
-                   {/* {(Object.keys(error).length < 1) ? <button type='submit' disabled={handleDisabled()}>Create Dog</button> : <button type='submit'>Create Dog</button>} */}
-                   {/* {(Object.keys(error).length > 1) ? <button type='submit' disabled={handleDisabled()}>Create Dog</button> : <button type='submit'>Create Dog</button>} */}
-                   <button disabled = {handleDisabled()}>create</button>
-                    {/* {!error ? <button type = 'submit' >Create dog</button> : <button type = 'submit' disabled>Create dog</button>}     */}
-                    {console.log(Object.keys(error))}
+                    </div>  
+                   <button className={FormCss.buttonform} disabled = {handleDisabled()}>CREATE!</button>
+                    <div>
                     {input.temperament?.map((temp, index)=> 
                     <div key = {index} className = 'divTemp'>
-                        <p>{temp}</p>
-                        <button id={temp} onClick = {(e)=> handleDelete(e) }>x</button>
+                        <p className={FormCss.input}>{temp}
+                        <button className={FormCss.buttondelete} id={temp} onClick = {(e)=> handleDelete(e) }>X</button></p>
                     </div>
                     )}
+                    </div>
                 </form>
-                
+               
+            <a href = '/home'> 
+                <button className={FormCss.buttonform} onClick={()=>dispatch(getAllDogs())}>Return home</button>
+            </a>
+            </div>
         </div>
     )
 }
