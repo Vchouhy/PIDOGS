@@ -71,14 +71,20 @@ export default function Home(){
 
     return(
         <div className={HomeCss.gral}>
-
-            <h1>Find your next dog!</h1>
-            <Link to = '/dogs/form' className={HomeCss.button1}>Create a new dog!</Link>
+{        allDogs.length === 0 ?
+         <>
+         <h1 className = {HomeCss.loading}>Loading...</h1>
+        </> :
+        <div>
             <br/>
-            <button className={HomeCss.button}onClick = {e=>{handleClick(e)}}>
-                RELOAD ALL DOGS
+            <br/>
+            <a href = '/dogs/form' className={HomeCss.button1}>Create a new dog!</a>
+            <button className={HomeCss.button1}onClick = {e=>{handleClick(e)}}>
+                Reload all dogs
             </button>
             <br/>
+            <br/>
+            <h1>Find your next dog!</h1>
             <br/>
             <div className = {HomeCss.tit}>FILTERS</div>
             <div className = {HomeCss.divgral}>
@@ -142,7 +148,7 @@ export default function Home(){
                             allDogs = {allDogs.length}
                             pagination = {pagination}
                 />
-            </div>    
+            </div> </div>  } 
         </div>
     )
 

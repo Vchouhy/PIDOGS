@@ -66,6 +66,8 @@
     align-content: center;
     margin-left: 3rem;
     font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-wrap: wrap;
 }
 .tit{
     flex-direction: column;
@@ -86,6 +88,18 @@
     background-color: #c6c6c6;;
     margin: 0;
     padding: 0;
+}
+.paginado:hover{
+    background-color: #7A7A72;
+}
+.loading{
+    background-color: #c6c6c6;
+    font-family: Arial, Helvetica, sans-serif;
+    color:#7A7A72;
+    width: 100%;
+    height: 100vh;
+    align-content: center;
+
 }
 /*
 colores
