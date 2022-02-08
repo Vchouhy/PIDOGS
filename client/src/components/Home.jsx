@@ -1,7 +1,8 @@
-//eslint-disable-next-line
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector} from 'react-redux';
 import { getAllDogs, filterCreated, orderAscDes, orderByWeight, filterDogsByTemperaments, getTemperaments } from '../actions';
+//eslint-disable-next-line
 import { Link } from 'react-router-dom'
 import Card from "./Card";
 import Pagination from "./Pagination";
